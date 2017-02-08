@@ -1,0 +1,36 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+imports:
+    - { resource: services/repositories.yml }
+    - { resource: services/handlers.yml }
+
+services:
+
+    app.oauth_listener:
+      class: AppBundle\EventListener\OAuthListener
+      arguments: ['@fos_oauth_server.client_manager.default']
+      tags:
+          - { name: kernel.event_listener, event: user.registered, method: onUserRegistered }
+
+    app.acl_listener:
+      class: AppBundle\EventListener\ACLListener
+      arguments: ['@security.acl.provider', '@security.token_storage', '@crossfit_user_repository']
+      tags:
+          - { name: kernel.event_listener, event: user.registered, method: onUserRegistered }
+
+    exercise_service:
+        class: AppBundle\Service\CreateExercise
+        arguments:
+            - "@exercise_repository"
+
+    unit_service:
+        class: AppBundle\Service\CreateUnitService
+        arguments:
+            - "@unit_repository"
+
+    custom.tactican.middleware.command_logger:
+        class: AppBundle\Middleware\CommandLoggerMiddleware
+        arguments: [ "@command_log_repository", "@crossfit_user_repository"]

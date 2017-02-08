@@ -1,0 +1,36 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+
+    user.register_user_handler:
+        class: AppBundle\CommandHandler\RegisterUserHandler
+        arguments: ['@fos_user.user_manager', '@event_dispatcher', '@crossfit_user_repository']
+        tags:
+            - { name: tactician.handler, command: AppBundle\Commands\RegisterUserCommand }
+
+    user.update_user_handler:
+        class: AppBundle\CommandHandler\UpdateUserHandler
+        arguments: ['@crossfit_user_repository']
+        tags:
+            - { name: tactician.handler, command: AppBundle\Commands\UpdateUserCommand }
+
+    exercise.log_result_handler:
+        class: AppBundle\CommandHandler\LogResultHandler
+        arguments: ['@crossfit_user_repository', '@unit_repository', '@exercise_repository', '@exercise_result_repository']
+        tags:
+            - { name: tactician.handler, command: AppBundle\Commands\LogResultCommand }
+
+    exercise.add_exercise_category_handler:
+        class: AppBundle\CommandHandler\AddExerciseCategoryHandler
+        arguments: ['@exercise_category_repository', '@crossfit_user_repository']
+        tags:
+            - { name: tactician.handler, command: AppBundle\Commands\AddExerciseCategoryCommand }
+
+    exercise.add_exercise_handler:
+        class: AppBundle\CommandHandler\AddExerciseHandler
+        arguments: ['@exercise_repository', '@crossfit_user_repository', '@exercise_category_repository']
+        tags:
+            - { name: tactician.handler, command: AppBundle\Commands\AddExerciseCommand }

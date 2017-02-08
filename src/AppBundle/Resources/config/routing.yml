@@ -1,0 +1,20 @@
+unit:
+    type: rest
+    resource: "@AppBundle/Controller/LogResultController.php"
+
+exercise:
+    type: rest
+    resource: "@AppBundle/Controller/ExerciseController.php"
+
+exercise_category:
+    type: rest
+    resource: "@AppBundle/Controller/ExerciseCategoryController.php"
+
+user:
+    type: rest
+    resource: "@AppBundle/Controller/UserController.php"
+
+unit:
+    type: rest
+    resource: "@AppBundle/Controller/UnitController.php"
+

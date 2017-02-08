@@ -1,0 +1,7 @@
+# Error messages
+command:
+    register_user_command:
+        username:
+            not_blank: "The username cannot be empty."
+        email:
+            invalid: "The emailadres is invalid."

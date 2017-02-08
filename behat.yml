@@ -1,0 +1,31 @@
+default:
+  suites:
+    exercise:
+          paths:  [ %paths.base%/features/exercise ]
+          contexts:
+            - Behat\MinkExtension\Context\MinkContext
+            - AppBundle\Behat\GuzzleContext
+            - AppBundle\Behat\OAuth2Context:
+                userManager: '@fos_user.user_manager'
+                clientManager: '@fos_oauth_server.client_manager.default'
+                tokenManager: '@fos_oauth_server.access_token_manager.default'
+    user:
+              paths:  [ %paths.base%/features/user ]
+              contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AppBundle\Behat\GuzzleContext
+                - AppBundle\Behat\OAuth2Context:
+                    userManager: '@fos_user.user_manager'
+                    clientManager: '@fos_oauth_server.client_manager.default'
+                    tokenManager: '@fos_oauth_server.access_token_manager.default'
+#    default:
+#      contexts:
+#        - FeatureContext:
+#            session:   '@session'
+  extensions:
+    Gorghoa\ScenarioStateBehatExtension\ServiceContainer\ScenarioStateExtension: ~
+    Behat\Symfony2Extension: ~
+    Behat\MinkExtension:
+      sessions:
+        default:
+          symfony2: ~

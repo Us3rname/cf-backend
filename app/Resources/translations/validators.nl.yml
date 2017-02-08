@@ -1,0 +1,9 @@
+# Error messages
+command:
+    register_user_command:
+        username:
+            not_blank: "De gebruikersnaam mag niet leeg zijn."
+        password:
+            not_blank: "Het wachtwoord mag niet leeg zijn."
+        email:
+            invalid: "Er is een ongeldig emailadres opgegeven."

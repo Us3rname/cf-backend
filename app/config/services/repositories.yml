@@ -1,0 +1,42 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+
+    exercise_repository:
+      class: AppBundle\Repository\ExerciseRepository
+      factory: ["@doctrine.orm.entity_manager", getRepository]
+      arguments:
+        - AppBundle\Entity\Exercise
+
+    crossfit_user_repository:
+        class: AppBundle\Repository\CrossfitUserRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+                - AppBundle\Entity\CrossfitUser
+
+    unit_repository:
+        class: AppBundle\Repository\UnitRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+                - AppBundle\Entity\Unit
+
+    exercise_result_repository:
+        class: AppBundle\Repository\ExerciseResultRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+                - AppBundle\Entity\ExerciseResult
+
+    command_log_repository:
+        class: AppBundle\Repository\CommandLogRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+                - AppBundle\Entity\CommandLog
+
+    exercise_category_repository:
+        class: AppBundle\Repository\ExerciseCategoryRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments:
+                - AppBundle\Entity\ExerciseCategory
